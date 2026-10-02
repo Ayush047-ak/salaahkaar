@@ -1,7 +1,6 @@
 import numpy as np
 from typing import Dict, Any, List
 from shapely.geometry import Polygon
-import open3d as o3d
 import trimesh
 
 class VolumeGenerator:
@@ -35,11 +34,7 @@ class VolumeGenerator:
             # Translate to base elevation
             mesh.apply_translation([0, 0, base_elevation])
             
-            # Export to Open3D point cloud logic (just as proof of Open3D usage requested)
-            o3d_mesh = o3d.geometry.TriangleMesh()
-            o3d_mesh.vertices = o3d.utility.Vector3dVector(mesh.vertices)
-            o3d_mesh.triangles = o3d.utility.Vector3iVector(mesh.faces)
-            o3d_mesh.compute_vertex_normals()
+            # Open3D logic removed for Vercel deployment compatibility (it was unused here anyway)
             
             # Convert mesh back to serializable vertices for the frontend (JSON/GeoJSON structure)
             mesh_vertices = mesh.vertices.tolist()
