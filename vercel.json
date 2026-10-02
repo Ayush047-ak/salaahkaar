@@ -1,0 +1,45 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "api": {
+      "root": "apps/api",
+      "framework": "express",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "geospatial",
+          "format": "url",
+          "env": "GEOSPATIAL_SERVICE_URL"
+        }
+      ]
+    },
+    "web": {
+      "root": "apps/web",
+      "framework": "vite"
+    },
+    "geospatial": {
+      "root": "services/geospatial",
+      "framework": "fastapi"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/v1/(.*)",
+      "destination": {
+        "service": "api"
+      }
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "geospatial"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "web"
+      }
+    }
+  ]
+}

@@ -15,7 +15,8 @@ export const ingestionApi = {
     formData.append('file', file);
     
     // We cannot use apiFetch directly because fetch with FormData shouldn't have 'Content-Type': 'application/json'
-    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000/api/v1'}/ingestion/upload`, {
+    const baseUrl = import.meta.env.PROD ? '/api/v1' : (import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000/api/v1');
+    const res = await fetch(`${baseUrl}/ingestion/upload`, {
       method: 'POST',
       body: formData,
     });

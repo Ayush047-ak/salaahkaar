@@ -51,7 +51,7 @@ export class WorkflowService {
              const geom = parcel.geom_geojson;
              if (geom && geom.coordinates && geom.coordinates[0]) {
                 // Call python volume generation
-                await fetch(`${geospatialUrl}/api/volumes`, {
+                await fetch(new URL('api/volumes', geospatialUrl).toString(), {
                    method: 'POST',
                    headers: { 'Content-Type': 'application/json' },
                    body: JSON.stringify({
@@ -64,7 +64,7 @@ export class WorkflowService {
                 });
                 
                 // For reconciliation, hit Python reconciliation endpoint
-                await fetch(`${geospatialUrl}/api/reconcile/cadastre`, {
+                await fetch(new URL('api/reconcile/cadastre', geospatialUrl).toString(), {
                    method: 'POST',
                    headers: { 'Content-Type': 'application/json' },
                    body: JSON.stringify({

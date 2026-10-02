@@ -55,7 +55,7 @@ export const ThreeViewer: React.FC<ThreeViewerProps> = ({
       try {
         // Here we hit the geospatial service directly to get the 3D volume
         // In production this would be orchestrated via the Node API and stored in PostGIS
-        const res = await fetch(`${import.meta.env.VITE_GEOSPATIAL_SERVICE_URL || 'http://localhost:8000'}/api/volumes`, {
+        const res = await fetch(`/api/volumes`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
