@@ -1,0 +1,34 @@
+{
+  "name": "salaahkaar-monorepo",
+  "version": "1.0.0",
+  "description": "Salaahkaar: 3D Property Reconciliation, Conflict Graph, and Geospatial Verification Platform",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:api": "npm run dev --workspace=apps/api",
+    "dev:geospatial": "cd services/geospatial && uvicorn app.main:app --reload --port 8000",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
+  },
+  "keywords": [
+    "geospatial",
+    "property-reconciliation",
+    "cadastre",
+    "3d-mesh",
+    "neo4j",
+    "postgis",
+    "fastapi",
+    "react",
+    "threejs"
+  ],
+  "author": "Salaahkaar Team",
+  "license": "MIT"
+}

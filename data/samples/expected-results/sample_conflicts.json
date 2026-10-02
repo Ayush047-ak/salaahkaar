@@ -1,0 +1,9 @@
+[
+  {
+    "conflict_id": "conf-01",
+    "parcels": ["p-101", "p-102"],
+    "overlap_sqm": 18.4,
+    "severity": "HIGH",
+    "easement_violations": 0
+  }
+]

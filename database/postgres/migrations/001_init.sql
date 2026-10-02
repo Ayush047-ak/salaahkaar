@@ -1,0 +1,2 @@
+-- Initial PostGIS migration placeholder
+-- Run schema.sql for complete initial tables

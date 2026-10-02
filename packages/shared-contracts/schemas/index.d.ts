@@ -1,0 +1,6 @@
+export declare const CADASTRE_STANDARDS: {
+    DEFAULT_CRS: string;
+    LOCAL_METRIC_CRS: string;
+    MAX_ALLOWED_BOUNDARY_TOLERANCE_METERS: number;
+    MAX_ALLOWED_AREA_DISCREPANCY_PERCENT: number;
+};

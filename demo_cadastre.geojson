@@ -1,0 +1,26 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "parcel_id": "PU-018",
+        "owner": "Demo Holdings LLC",
+        "zoning": "Mixed-Use Commercial",
+        "description": "Primary Cadastral Boundary for Demo Workspace"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-20.0, -10.0],
+            [20.0, -10.0],
+            [15.0, 15.0],
+            [-25.0, 15.0],
+            [-20.0, -10.0]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "p-101",
+        "khasraNumber": "101/A",
+        "ownerName": "Aarav Sharma",
+        "claimedAreaSqM": 450.0,
+        "zoning": "Residential"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.2090, 28.6139],
+            [77.2096, 28.6139],
+            [77.2096, 28.6145],
+            [77.2090, 28.6145],
+            [77.2090, 28.6139]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "p-102",
+        "khasraNumber": "101/B",
+        "ownerName": "Vikram Mehta",
+        "claimedAreaSqM": 520.0,
+        "zoning": "Mixed"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.2095, 28.6139],
+            [77.2102, 28.6139],
+            [77.2102, 28.6145],
+            [77.2095, 28.6145],
+            [77.2095, 28.6139]
+          ]
+        ]
+      }
+    }
+  ]
+}

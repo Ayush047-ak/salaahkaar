@@ -1,0 +1,14 @@
+{
+  "name": "@salaahkaar/shared-contracts",
+  "version": "1.0.0",
+  "description": "Shared TypeScript contracts, types, and schemas for Salaahkaar platform",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
