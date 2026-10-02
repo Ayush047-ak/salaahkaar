@@ -14,7 +14,7 @@ export const DataIntakePage: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [datasetType, setDatasetType] = useState('POINT_CLOUD'); // POINT_CLOUD, CADASTRE, FLOOR_SCHEDULE
+  const [datasetType, setDatasetType] = useState('POINTCLOUD'); // POINTCLOUD, CADASTRAL_PARCEL, OTHER
 
   useEffect(() => {
     const activeId = localStorage.getItem('activeProjectId');
@@ -155,9 +155,9 @@ export const DataIntakePage: React.FC = () => {
                     value={datasetType}
                     onChange={(e) => setDatasetType(e.target.value)}
                   >
-                    <option value="POINT_CLOUD">Point Cloud (LAS/LAZ)</option>
-                    <option value="CADASTRE">Cadastral Boundary (GeoJSON)</option>
-                    <option value="FLOOR_SCHEDULE">Floor Schedule (CSV)</option>
+                    <option value="POINTCLOUD">Point Cloud (LAS/LAZ)</option>
+                    <option value="CADASTRAL_PARCEL">Cadastral Boundary (GeoJSON)</option>
+                    <option value="OTHER">Floor Schedule (CSV)</option>
                   </select>
                 </div>
                 <div style={{ display: 'flex', gap: '10px' }}>

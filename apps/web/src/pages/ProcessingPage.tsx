@@ -55,7 +55,7 @@ export const ProcessingPage: React.FC = () => {
     }
   };
 
-  const stageOrder = ['CREATED', 'POINTCLOUD_PREPROCESSING', 'FOOTPRINT_EXTRACTION', 'RECONCILIATION', 'CONFLICT_GRAPHING', 'COMPLETED'];
+  const stageOrder = ['CREATED', 'DATA_INTAKE', 'POINTCLOUD_PREPROCESSING', 'FOOTPRINT_EXTRACTION', 'RECONCILIATION', 'CONFLICT_GRAPHING', 'COMPLETED'];
   const currentIndex = stageOrder.indexOf(projectStatus);
   const isCompleted = currentIndex === stageOrder.length - 1;
 
@@ -134,7 +134,7 @@ export const ProcessingPage: React.FC = () => {
             <RotateCw size={15} /> Refresh
           </button>
           {!isCompleted && (
-            <button className="btn-primary" onClick={startPipeline} disabled={loading || projectStatus !== 'CREATED'}>
+            <button className="btn-primary" onClick={startPipeline} disabled={loading || !['CREATED', 'DATA_INTAKE'].includes(projectStatus)}>
                {loading ? <Loader2 size={15} className="animate-spin" /> : 'Run Pipeline'}
             </button>
           )}
@@ -154,13 +154,13 @@ export const ProcessingPage: React.FC = () => {
               width: '40px',
               height: '40px',
               borderRadius: '8px',
-              backgroundColor: isCompleted ? '#E6F6F3' : (projectStatus !== 'CREATED' ? '#FFFBEB' : '#F1F5F9'),
-              color: isCompleted ? '#0D7A68' : (projectStatus !== 'CREATED' ? '#D97706' : '#64748B'),
+              backgroundColor: isCompleted ? '#E6F6F3' : (!['CREATED', 'DATA_INTAKE'].includes(projectStatus) ? '#FFFBEB' : '#F1F5F9'),
+              color: isCompleted ? '#0D7A68' : (!['CREATED', 'DATA_INTAKE'].includes(projectStatus) ? '#D97706' : '#64748B'),
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              {isCompleted ? <CheckCircle size={22} /> : (projectStatus !== 'CREATED' ? <Loader2 size={22} className="animate-spin" /> : <Info size={22} />)}
+              {isCompleted ? <CheckCircle size={22} /> : (!['CREATED', 'DATA_INTAKE'].includes(projectStatus) ? <Loader2 size={22} className="animate-spin" /> : <Info size={22} />)}
             </div>
             <div>
               <div style={{ fontSize: '0.72rem', color: '#64748B', fontWeight: 600, textTransform: 'uppercase' }}>
@@ -168,8 +168,8 @@ export const ProcessingPage: React.FC = () => {
               </div>
               <div style={{ fontWeight: 700, fontSize: '1rem', color: '#0F172A', display: 'flex', alignItems: 'center', gap: '10px' }}>
                 {projectId?.slice(0, 8)}
-                <span className={`badge ${isCompleted ? 'badge-ready' : (projectStatus !== 'CREATED' ? 'badge-warning' : 'badge-neutral')}`}>
-                  ● {isCompleted ? 'Completed' : (projectStatus !== 'CREATED' ? 'Running' : 'Ready to start')}
+                <span className={`badge ${isCompleted ? 'badge-ready' : (!['CREATED', 'DATA_INTAKE'].includes(projectStatus) ? 'badge-warning' : 'badge-neutral')}`}>
+                  ● {isCompleted ? 'Completed' : (!['CREATED', 'DATA_INTAKE'].includes(projectStatus) ? 'Running' : 'Ready to start')}
                 </span>
               </div>
             </div>
