@@ -1,26 +1,27 @@
 from fastapi import APIRouter
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List
+import numpy as np
+from app.pipelines.preprocessing_pipeline import PreprocessingPipeline
 
 router = APIRouter(prefix="/api/preprocess", tags=["Preprocessing"])
-
+pipeline = PreprocessingPipeline()
 
 class PreprocessRequest(BaseModel):
     bbox: List[float]
     sample_point_count: int = 1000
 
-
 @router.post("")
 def preprocess_dataset(req: PreprocessRequest):
-    return JSONResponse(
-        status_code=503,
-        content={
-            "error": "service_unavailable",
-            "message": (
-                "Preprocessing requires numpy/scipy which exceed Vercel's 250 MB limit. "
-                "Deploy the full service to Railway/Render/Fly.io."
-            ),
-            "bbox": req.bbox,
-        },
-    )
+    # Mock / Synthetic points in bbox range
+    min_x, min_y, max_x, max_y = req.bbox
+    xs = np.random.uniform(min_x, max_x, req.sample_point_count)
+    ys = np.random.uniform(min_y, max_y, req.sample_point_count)
+    zs = np.random.uniform(0.0, 15.0, req.sample_point_count)
+    points = np.column_stack((xs, ys, zs))
+
+    res = pipeline.run(points, req.bbox)
+    return {
+        "initial_points": res["initial_points"],
+        "retained_points": res["retained_building_points"]
+    }
