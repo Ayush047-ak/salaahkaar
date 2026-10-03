@@ -7,6 +7,7 @@ COPY packages/shared-contracts ./packages/shared-contracts
 COPY apps/api ./apps/api
 
 RUN npm install
+RUN npm run build --workspace=packages/shared-contracts --if-present
 RUN npm run build --workspace=apps/api
 
 FROM node:20-alpine AS runner
