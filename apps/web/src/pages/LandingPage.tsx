@@ -150,13 +150,7 @@ export function LandingPage() {
               <span className="landing-visual__live"><span /> SPATIAL REVIEW</span>
               <span className="landing-visual__coords">27°10' N &nbsp; 78°01' E</span>
             </div>
-            <div className="landing-visual__plot" aria-hidden="true">
-              <div className="landing-visual__grid" />
-              <div className="landing-parcel landing-parcel--one"><span>PCL-0847</span></div>
-              <div className="landing-parcel landing-parcel--two"><span>PU-018</span></div>
-              <div className="landing-parcel landing-parcel--three" />
-              <div className="landing-visual__conflict"><span /> Boundary review</div>
-            </div>
+
             <div className="landing-visual__caption">
               <div>
                 <span className="landing-visual__caption-label">CANDIDATE PROPERTY</span>
