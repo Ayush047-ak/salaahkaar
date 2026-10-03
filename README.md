@@ -11,7 +11,7 @@
 
 ## 🌐 Live Deployment
 
-🚀 **Try the Live Application:** [**https://salaahkaar-lpdv.vercel.app/**](https://salaahkaar-lpdv.vercel.app/)
+🚀 **Try the Live Application:** [**https://salaahkaar-lpdv.vercel.app/**](https://salaahkar.vercel.app/)
 
 > **Salaahkaar** transforms complex land administration, deeds, and aerial LiDAR data into an interactive, volumetric 3D digital cadastre. It detects physical-vs-legal boundary encroachments, height/setback violations, and ownership conflicts using graph topology and deterministic spatial geometry algorithms.
 
