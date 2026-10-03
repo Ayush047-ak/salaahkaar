@@ -28,11 +28,13 @@ export const DataIntakePage: React.FC = () => {
     projectsApi.getById(activeId)
       .then(data => setProjectDetails(data))
       .catch(() => {
+        const stored = localStorage.getItem(`proj_${activeId}`);
+        const parsed = stored ? JSON.parse(stored) : null;
         setProjectDetails({
           id: activeId,
-          name: 'Bengaluru IT Corridor Strata Reconciliation',
-          description: 'Controlled demo for building, floor, and parcel reconciliation.',
-          region: 'Bengaluru, Karnataka'
+          name: parsed?.name || 'Bengaluru IT Corridor Strata Reconciliation',
+          description: parsed?.description || 'Controlled demo for building, floor, and parcel reconciliation.',
+          region: parsed?.region || 'Bengaluru, Karnataka'
         });
       });
       

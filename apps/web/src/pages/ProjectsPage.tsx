@@ -40,17 +40,20 @@ export const ProjectsPage: React.FC = () => {
 
   const fetchProjects = () => {
     setLoading(true);
+    const stored = localStorage.getItem('local_projects');
+    const localList: any[] = stored ? JSON.parse(stored) : [];
+
     projectsApi.list()
       .then(data => {
         if (data && data.length > 0) {
-          setProjects(data);
+          setProjects([...localList, ...data]);
         } else {
-          setProjects(DEMO_PROJECTS);
+          setProjects([...localList, ...DEMO_PROJECTS]);
         }
       })
       .catch(err => {
         console.warn("Using offline demo projects:", err);
-        setProjects(DEMO_PROJECTS);
+        setProjects([...localList, ...DEMO_PROJECTS]);
       })
       .finally(() => {
         setLoading(false);
@@ -71,13 +74,40 @@ export const ProjectsPage: React.FC = () => {
         setShowModal(false);
         setNewProject({ name: '', description: '', region: '', crs: 'EPSG:4326' });
         openWorkspace(data.id);
+        return;
       }
     } catch (err) {
-      console.error(err);
-      alert('Failed to create project');
-    } finally {
-      setCreating(false);
+      console.warn("Backend API unavailable, creating project locally in workspace:", err);
     }
+    
+    // Graceful offline creation
+    const localId = 'proj-' + Date.now();
+    const created = {
+      id: localId,
+      name: newProject.name,
+      description: newProject.description || 'Spatial verification & cadastre workspace.',
+      region: newProject.region,
+      crs: newProject.crs || 'EPSG:4326',
+      total_parcels: 0,
+      status: 'DATA_INTAKE',
+      created_at: new Date().toISOString()
+    };
+    
+    try {
+      const stored = localStorage.getItem('local_projects');
+      const list = stored ? JSON.parse(stored) : [];
+      list.unshift(created);
+      localStorage.setItem('local_projects', JSON.stringify(list));
+      localStorage.setItem(`proj_${localId}`, JSON.stringify(created));
+    } catch (e) {
+      console.error(e);
+    }
+
+    setProjects(prev => [created, ...prev]);
+    setShowModal(false);
+    setNewProject({ name: '', description: '', region: '', crs: 'EPSG:4326' });
+    setCreating(false);
+    openWorkspace(localId);
   };
 
   return (
