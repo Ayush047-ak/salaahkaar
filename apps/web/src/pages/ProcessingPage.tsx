@@ -42,7 +42,7 @@ export const ProcessingPage: React.FC = () => {
     try {
       // In a real app, we would hit a run-pipeline endpoint.
       // For now, let's just assume we trigger the node API orchestration (which we will build).
-      const baseUrl = import.meta.env.PROD ? '/api/v1' : (import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000/api/v1');
+      const baseUrl = import.meta.env.VITE_API_BASE_URL || '/api/v1';
       const res = await fetch(`${baseUrl}/processing/run-pipeline`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
