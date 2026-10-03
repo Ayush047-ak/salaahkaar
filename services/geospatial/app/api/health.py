@@ -4,12 +4,14 @@ import sys
 
 router = APIRouter(prefix="/health", tags=["Health"])
 
+
 @router.get("")
 def health_check():
     return {
         "status": "healthy",
         "service": "salaahkaar-geospatial-engine",
+        "mode": "stub",
         "python_version": sys.version,
         "platform": platform.platform(),
-        "gpu_accelerated": False
+        "gpu_accelerated": False,
     }

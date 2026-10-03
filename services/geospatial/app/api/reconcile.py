@@ -1,16 +1,27 @@
 from fastapi import APIRouter
-from app.schemas.spatial_schema import ReconciliationRequest, ReconciliationResponse
-from app.pipelines.reconciliation_pipeline import ReconciliationPipeline
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+from typing import List, Optional
 
 router = APIRouter(prefix="/api/reconcile", tags=["Reconciliation"])
-pipeline = ReconciliationPipeline()
 
-@router.post("", response_model=ReconciliationResponse)
+
+class ReconciliationRequest(BaseModel):
+    parcel_a_coords: List[List[float]]
+    parcel_b_coords: List[List[float]]
+    easement_coords: Optional[List[List[float]]] = None
+
+
+@router.post("")
 def reconcile_boundaries(req: ReconciliationRequest):
-    result = pipeline.reconcile_parcels(req.parcel_a_coords, req.parcel_b_coords, req.easement_coords)
-    boundary_conflict = result["boundary_conflict"]
-    return ReconciliationResponse(
-        has_overlap=boundary_conflict["has_overlap"],
-        overlap_area_sqm=boundary_conflict["overlap_area_sqm"],
-        encroachment_severity=boundary_conflict["severity"]
+    return JSONResponse(
+        status_code=503,
+        content={
+            "error": "service_unavailable",
+            "message": (
+                "Boundary reconciliation requires shapely/geopandas which exceed "
+                "Vercel's 250 MB bundle limit. "
+                "Deploy the full service to Railway/Render/Fly.io."
+            ),
+        },
     )
