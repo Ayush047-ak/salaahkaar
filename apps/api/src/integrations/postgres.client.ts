@@ -1,8 +1,11 @@
 import { Pool } from 'pg';
 import { config } from '../config';
 
+const isCloud = config.databaseUrl.includes('render.com') || config.databaseUrl.includes('ssl=true') || config.nodeEnv === 'production';
+
 export const pgPool = new Pool({
   connectionString: config.databaseUrl,
+  ssl: isCloud ? { rejectUnauthorized: false } : undefined,
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,
