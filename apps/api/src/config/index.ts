@@ -9,7 +9,7 @@ export const config = {
   databaseUrl: process.env.DATABASE_URL || 'postgresql://salaahkaar_user:salaahkaar_password@localhost:5432/salaahkaar_db',
   neo4j: {
     uri: process.env.NEO4J_URI || 'bolt://localhost:7687',
-    user: process.env.NEO4J_USER || 'neo4j',
+    user: process.env.NEO4J_USER || process.env.NEO4J_USERNAME || 'neo4j',
     password: process.env.NEO4J_PASSWORD || 'salaahkaar_secret',
   },
 };
